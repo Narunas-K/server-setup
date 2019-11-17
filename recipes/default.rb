@@ -7,6 +7,7 @@ package 'vim'
 package 'binutils'
 package 'tree'
 package 'git'
+package 'dstat'
 
 template '/home/narunas/.bashrc' do
   source 'bashrc'
