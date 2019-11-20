@@ -8,6 +8,7 @@ package 'binutils'
 package 'tree'
 package 'git'
 package 'dstat'
+package 'iperf3'
 
 template '/home/narunas/.bashrc' do
   source 'bashrc'
