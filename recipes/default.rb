@@ -9,6 +9,8 @@ package 'tree'
 package 'git'
 package 'dstat'
 package 'iperf3'
+package 'sysstat'
+package 'tcpdump'
 
 template '/home/narunas/.bashrc' do
   source 'bashrc'
