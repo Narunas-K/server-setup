@@ -11,6 +11,8 @@ package 'dstat'
 package 'iperf3'
 package 'sysstat'
 package 'tcpdump'
+package 'nc'
+package 'sysstat'
 
 template '/home/narunas/.bashrc' do
   source 'bashrc'
@@ -37,7 +39,7 @@ content 'LANG=en_US.utf-8
 LC_ALL=en_US.utf-8'
 end
 
-include_recipe 'server-setup::k8-master-setup'
-#include_recipe 'server-setup::k8-worker1-setup'
+#include_recipe 'server-setup::k8-master-setup'
+include_recipe 'server-setup::k8-worker1-setup'
 #include_recipe 'server-setup::k8-worker2-setup'
 #include_recipe 'server-setup::k8-worker3-setup'

@@ -3,3 +3,5 @@ template '/etc/motd' do
 end
 
 hostname 'kube-worker2'
+
+include_recipe 'server-setup::default-worker-setup'
