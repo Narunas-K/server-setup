@@ -25,3 +25,10 @@ directory '/tmp/phys-tcp-throughput-test' do
   group 'narunas'
   mode '0755'
 end
+
+directory '/tmp/phys-tcp-throughput-test/script-logs' do
+  recursive true
+  owner 'narunas'
+  group 'narunas'
+  mode '0755'
+end
