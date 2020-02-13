@@ -1,168 +1,53 @@
-#variables
-$start_hour=20
-$tst_window_1 = 0
-$tst_window_2 = 10
-$tst_window_3 = 20
-$tst_window_4 = 30
-$tst_window_5 = 40
-$tst_window_6 = 50
-
+###variables
+$start_hour = 13
+$start_min = 00
+$minutes_from_midnight = $start_hour*60+$start_min
+#Iperf server interfaces names
 $kw1eth0='enp3s0f1'
 $kw1eth1='enp4s0f0'
 $kw1eth2='enp4s0f1'
 $kw1eth3='ens2f0'
 $kw1eth4='ens2f1'
+$iperf_server_port = '50001'
+#Interfaces arrays
+iperf_server_interfaces_array = [$kw1eth0, $kw1eth1, $kw1eth2, $kw1eth3, $kw1eth4]
+iperf_server_interfaces_names_array = ["kw1eth0", "kw1eth1", "kw1eth2", "kw1eth3", "kw1eth4"]
+iperf_client_interfaces_names_array = ["kw3eth0", "kw3eth1", "kw3eth2", "kw3eth3", "kw3eth4"]
+mss_values_array = [88, 216, 472, 984, 1460]
+interfaces_number_array = [0, 1, 2, 3, 4]
+test_number_array = [0, 1, 2, 3, 4]
+$global_test_number = 0
+$cron_hour = 0
+$cron_min = 0
 
-##1st pair of interfaces
-#cron 'kw1eth0_kw3eth0_1' do
-#  minute $tst_window_1
-#  hour $start_hour
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth0 50002 kw1eth0_kw3eth0_1 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth0_kw3eth0_1 2>&1"
-#end
-#
-#cron 'kw1eth0_kw3eth0_2' do
-#  minute $tst_window_2
-#  hour $start_hour
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth0 50002 kw1eth0_kw3eth0_2 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth0_kw3eth0_2 2>&1"
-#end
-#
-#cron 'kw1eth0_kw3eth0_3' do
-#  minute $tst_window_3
-#  hour $start_hour
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth0 50002 kw1eth0_kw3eth0_3 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth0_kw3eth0_3 2>&1"
-#end
-#
-##2nd pair of interfaces
-#cron 'kw1eth1_kw3eth1_1' do
-#  minute $tst_window_4
-#  hour $start_hour
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth1 50002 kw1eth1_kw3eth1_1 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth1_kw3eth1_1 2>&1"
-#end
-#
-#cron 'kw1eth1_kw3eth1_2' do
-#  minute $tst_window_5
-#  hour $start_hour
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth1 50002 kw1eth1_kw3eth1_2 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth1_kw3eth1_2 2>&1"
-#end
-#
-#cron 'kw1eth1_kw3eth1_3' do
-#  minute $tst_window_6
-#  hour $start_hour
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth1 50002 kw1eth1_kw3eth1_3 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth1_kw3eth1_3 2>&1"
-#end
-#
-##3rd pair of interfaces
-#cron 'kw1eth2_kw3eth2_1' do
-#  minute $tst_window_1
-#  hour $start_hour+1
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth2 50002 kw1eth2_kw3eth2_1 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth2_kw3eth2_1 2>&1"
-#end
-#
-#cron 'kw1eth2_kw3eth2_2' do
-#  minute $tst_window_2
-#  hour $start_hour+1
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth2 50002 kw1eth2_kw3eth2_2 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth2_kw3eth2_2 2>&1"
-#end
-#
-#cron 'kw1eth2_kw3eth2_3' do
-#  minute $tst_window_3
-#  hour $start_hour+1
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth2 50002 kw1eth2_kw3eth2_3 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth2_kw3eth2_3 2>&1"
-#end
-#
-##4th
-#cron 'kw1eth3_kw3eth3_1' do
-#  minute $tst_window_4
-#  hour $start_hour+1
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth3 50002 kw1eth3_kw3eth3_1 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth3_kw3eth3_1 2>&1"
-#end
-#
-#cron 'kw1eth3_kw3eth3_2' do
-#  minute $tst_window_5
-#  hour $start_hour+1
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth3 50002 kw1eth3_kw3eth3_2 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth3_kw3eth3_1 2>&1"
-#end
-#
-#cron 'kw1eth3_kw3eth3_3' do
-#  minute $tst_window_6
-#  hour $start_hour+1
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth3 50002 kw1eth3_kw3eth3_3 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth3_kw3eth3_1 2>&1"
-#end
-#
-##5th pair of interfaces
-#cron 'kw1eth4_kw3eth4_1' do
-#  minute $tst_window_1
-#  hour $start_hour+2
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth4 50002 kw1eth4_kw3eth4_1 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth4_kw3eth4_1 2>&1"
-#end
-#
-#cron 'kw1eth4_kw3eth4_2' do
-#  minute $tst_window_2
-#  hour $start_hour+2
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth4 50002 kw1eth4_kw3eth4_2 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth4_kw3eth4_2 2>&1"
-#end
-#
-#cron 'kw1eth4_kw3eth4_3' do
-#  minute $tst_window_3
-#  hour $start_hour+2
-#  user 'narunas'
-#  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth4 50002 kw1eth4_kw3eth4_3 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth4_kw3eth4_3 2>&1"
-#end
-#
-#6th pair of interfaces
-cron 'kw1eth2_kw3eth3_1' do
-  minute $tst_window_4
-  hour $start_hour+2
-  user 'narunas'
-  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth2 50002 kw1eth2_kw3eth3_1 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth2_kw3eth3_1 2>&1"
+#Cron creation loop
+##Assuming that one measurement is taken every 6 minutes and no more than 240 measurements are taken during a 24hr day
+for interface_number in  interfaces_number_array do
+  for test_number in test_number_array do
+    for mss_value in mss_values_array do
+      until $minutes_from_midnight <1440 do
+        $minutes_from_midnight = $minutes_from_midnight - 1440
+      end
+      $cron_hour = $minutes_from_midnight/60.floor
+      $cron_min = $minutes_from_midnight-($cron_hour*60)
+      cron "#{iperf_server_interfaces_names_array[interface_number]}_#{iperf_client_interfaces_names_array[interface_number]}_mss-#{mss_value}_#{test_number}" do
+        hour "#$cron_hour"
+        minute "#$cron_min"
+        user 'narunas'
+        command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #{iperf_server_interfaces_array[interface_number]} #$iperf_server_port #{iperf_server_interfaces_names_array[interface_number]}_#{iperf_client_interfaces_names_array[interface_number]}_mss-#{mss_value}_#{test_number} > /tmp/phys-tcp-throughput-test/script-logs/#{iperf_server_interfaces_names_array[interface_number]}_#{iperf_client_interfaces_names_array[interface_number]}_mss-#{mss_value}_#{test_number} 2>&1"
+      end
+    $global_test_number = $global_test_number + 1
+    $minutes_from_midnight = $minutes_from_midnight + 6
+    end
+  end
 end
 
-cron 'kw1eth2_kw3eth3_2' do
-  minute $tst_window_5
-  hour $start_hour+2
+#After tests are completed cleanup cron
+$cron_hour = $minutes_from_midnight/60.floor
+$cron_min = $minutes_from_midnight-($cron_hour*60)
+cron 'Cleanup cron' do
+  hour "#$cron_hour"
+  minute "#$cron_min"
   user 'narunas'
-  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth2 50002 kw1eth2_kw3eth3_2 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth2_kw3eth3_2 2>&1"
-end
-
-cron 'kw1eth2_kw3eth3_3' do
-  minute $tst_window_6
-  hour $start_hour+2
-  user 'narunas'
-  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth2 50002 kw1eth2_kw3eth3_3 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth2_kw3eth3_3 2>&1"
-end
-
-#7th pair of interfaces
-cron 'kw1eth3_kw3eth2_1' do
-  minute $tst_window_1
-  hour $start_hour+3
-  user 'narunas'
-  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth3 50002 kw1eth3_kw3eth2_1 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth3_kw3eth2_1 2>&1"
-end
-
-cron 'kw1eth3_kw3eth2_2' do
-  minute $tst_window_2
-  hour $start_hour+3
-  user 'narunas'
-  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth3 50002 kw1eth3_kw3eth2_2 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth3_kw3eth2_2 2>&1"
-end
-
-cron 'kw1eth3_kw3eth2_3' do
-  minute $tst_window_3
-  hour $start_hour+3
-  user 'narunas'
-  command "/home/narunas/repos/iperf3-scripts/iperf-server-run.sh #$kw1eth3 50002 kw1eth3_kw3eth2_3 > /tmp/phys-tcp-throughput-test/script-logs/kw1eth3_kw3eth2_3 2>&1"
+  command "/usr/bin/crontab -r "
 end
