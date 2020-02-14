@@ -1,6 +1,6 @@
 ##variables
-$start_hour = 12
-$start_min = 10
+$start_hour = 13
+$start_min = 0
 $minutes_from_midnight = $start_hour*60+$start_min
 #Iperf server interfaces IP addresses
 $kw1eth0 = '192.168.1.1'
@@ -17,7 +17,7 @@ $kw3eth4 = '192.168.5.2'
 $iperf_server_port = '50001'
 #Iterface names and IP addrays
 iperf_server_interfaces_array = [$kw1eth0, $kw1eth1, $kw1eth2, $kw1eth3, $kw1eth4]
-iperf_client_interfaces_array = [$kw3eth0, $kw3eth1, $kw1eth2, $kw3eth3, $kw3eth4]
+iperf_client_interfaces_array = [$kw3eth0, $kw3eth1, $kw3eth2, $kw3eth3, $kw3eth4]
 iperf_server_interfaces_names_array = ["kw1eth0", "kw1eth1", "kw1eth2", "kw1eth3", "kw1eth4"]
 iperf_client_interfaces_names_array = ["kw3eth0", "kw3eth1", "kw3eth2", "kw3eth3", "kw3eth4"]
 mss_values_array = [88, 216, 472, 984, 1460]
