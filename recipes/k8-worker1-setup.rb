@@ -1,5 +1,6 @@
 include_recipe 'server-setup::default-worker-setup'
-include_recipe 'server-setup::k8-worker1-crons'
+#include_recipe 'server-setup::k8-worker1-crons'
+include_recipe 'server-setup::k8-worker1-crons-teamed-interfaces'
 
 #variables
 $start_hour=20
